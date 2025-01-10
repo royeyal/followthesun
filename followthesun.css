@@ -1,27 +1,35 @@
-/***
-* Shrinking Sticky header, Elementor Container edition
+/* * Shrinking Sticky header, Elementor Container edition
 * class: .sticky-header
 * This will only work with the Elementor container section
-* the header uses additional 3 classes to gain higher CSS specificity and to avoid adding !important
-*/
-header.sticky-header.e-container.elementor-element {
+* the header uses additional 3 classes to gain higher CSS specificity and to avoid adding !important */
+
+header {
 	--header-height: 100px; /* Set your own header height */
 	--shrink-header-to: 0.6; /* Shrinks to 60%, values: 0.1 to 1 */
 	--transition-timing: .45s cubic-bezier(.4, 0, .2, 1); /* values: .1s to 0.5s (or more), replace "cubic-bezier(.4, 0, .2, 1)" with "ease" if you need a simpler transition */
-	background-color: rgba(244, 245, 248, 1); /* Set your own background color */
-
-	--min-height: var(--header-height);
+	min-height: var(--header-height);
 	--transition: background-color var(--transition-timing),
 					backdrop-filter var(--transition-timing),
 					box-shadow var(--transition-timing),
 					min-height var(--transition-timing);
 }
+header.sticky-header {
+	background-color: transparent;
+	min-height: var(--min-height);
+}
+header.sticky-header.elementor-sticky--active {
+	background-color: var(--e-global-color-5f1c106);
+	box-shadow: 0px 4px 33px 1px rgba(0, 0, 0, .07); /* Delete this line if you don't want shadow on scroll */
+	/* backdrop-filter: saturate(180%) blur(20px); */
+	min-height: calc( var(--header-height) * var(--shrink-header-to) );
+	transition: min-height var(--transition-timing);
+}
+
+header.sticky-header.e-container.elementor-element {
+	background-color: rgba(244, 245, 248, 1); /* Set your own background color */
+}
 header.sticky-header.e-container.elementor-element.elementor-sticky--effects {
 	background-color: rgba(244, 245, 248, .8); /* Set your own background color on scroll */
-	box-shadow: 0px 4px 33px 1px rgba(0, 0, 0, .07); /* Delete this line if you don't want shadow on scroll */
-	-webkit-backdrop-filter: saturate(180%) blur(20px); /* Delete this line if you don't use transparency on scroll */
-	backdrop-filter: saturate(180%) blur(20px); /* Delete this line if you don't use transparency on scroll */
-	--min-height: calc( var(--header-height) * var(--shrink-header-to) );
 }
 
 /***
