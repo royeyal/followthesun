@@ -1,0 +1,113 @@
+/***
+* Shrinking Sticky header, Elementor Container edition
+* class: .sticky-header
+* This will only work with the Elementor container section
+* the header uses additional 3 classes to gain higher CSS specificity and to avoid adding !important
+*/
+header.sticky-header.e-container.elementor-element {
+	--header-height: 100px; /* Set your own header height */
+	--shrink-header-to: 0.6; /* Shrinks to 60%, values: 0.1 to 1 */
+	--transition-timing: .45s cubic-bezier(.4, 0, .2, 1); /* values: .1s to 0.5s (or more), replace "cubic-bezier(.4, 0, .2, 1)" with "ease" if you need a simpler transition */
+	background-color: rgba(244, 245, 248, 1); /* Set your own background color */
+
+	--min-height: var(--header-height);
+	--transition: background-color var(--transition-timing),
+					backdrop-filter var(--transition-timing),
+					box-shadow var(--transition-timing),
+					min-height var(--transition-timing);
+}
+header.sticky-header.e-container.elementor-element.elementor-sticky--effects {
+	background-color: rgba(244, 245, 248, .8); /* Set your own background color on scroll */
+	box-shadow: 0px 4px 33px 1px rgba(0, 0, 0, .07); /* Delete this line if you don't want shadow on scroll */
+	-webkit-backdrop-filter: saturate(180%) blur(20px); /* Delete this line if you don't use transparency on scroll */
+	backdrop-filter: saturate(180%) blur(20px); /* Delete this line if you don't use transparency on scroll */
+	--min-height: calc( var(--header-height) * var(--shrink-header-to) );
+}
+
+/***
+* class: .logo
+* Add the class "logo" to your logo to scale your logo to 80% on scroll
+*/
+header.sticky-header .logo img,
+header.sticky-header .logo.elementor-widget-theme-site-logo img,
+header.sticky-header .logo .elementor-icon svg {
+	transition: transform var(--transition-timing);
+}
+header.sticky-header.elementor-sticky--effects .logo img,
+header.sticky-header.elementor-sticky--effects .logo.elementor-widget-theme-site-logo img,
+header.sticky-header.elementor-sticky--effects .logo .elementor-icon svg {
+	transform: scale(.80); /* Shrinks logo to 80%, values: 0.10 to 1 */
+}
+header.sticky-header .logo .elementor-icon svg {
+	width: auto;
+}
+
+/***
+* Optional: Shorter header on mobile
+*/
+@media only screen and (max-width: 767px) {
+	header.sticky-header,
+	header.sticky-header.e-container.elementor-element {
+		--header-height: 70px;
+	}
+}
+
+.elementor-widget-button .elementor-button svg {
+    transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+	transform: translate(1px, 1px);
+}
+.elementor-widget-button .elementor-button:hover svg {
+	transform: translate(-3px, 1px);
+}
+
+.content-block-heading .elementor-cta__content {
+	order: 2;
+}
+.content-block-heading .elementor-cta {
+	max-width: 780px;
+	margin: 0 auto;
+}
+.content-block-heading.full-width .elementor-cta  {
+    max-width: 100%;
+}
+.content-block-heading .elementor-cta__button-wrapper, .content-block-heading.w-image .elementor-cta__bg-wrapper {
+	text-align: center;
+}
+.content-block-heading .elementor-ribbon {
+    top: 120px;
+    transform: none;
+    height: auto;
+    width: 50%;
+    left: 20%;
+    order: 1;
+    border-radius: 50px;
+}
+.content-block-heading .elementor-ribbon-inner {
+	transform: none;
+	width: 100%;
+	margin-top: 0;
+}
+.content-block-text .elementor-ribbon-inner {
+	text-align: right;
+}
+.content-block-heading .elementor-cta__title,
+.content-block-heading .elementor-cta__icon {
+    text-align: center;
+}
+
+.shadow-layers {
+    box-shadow: 1.7px 0.9px 1.2px rgba(0, 0, 0, 0.019),
+  3.6px 1.9px 2.6px rgba(0, 0, 0, 0.027),
+  5.6px 2.9px 4.3px rgba(0, 0, 0, 0.032),
+  7.9px 4.1px 6.5px rgba(0, 0, 0, 0.036),
+  10.8px 5.6px 9.3px rgba(0, 0, 0, 0.04),
+  14.3px 7.5px 13.1px rgba(0, 0, 0, 0.043),
+  19.2px 10px 18.6px rgba(0, 0, 0, 0.049),
+  26.6px 13.9px 27.3px rgba(0, 0, 0, 0.056),
+  39.5px 20.6px 42.9px rgba(0, 0, 0, 0.068),
+  69px 36px 80px rgba(0, 0, 0, 0.09);
+}
+
+.elementor-blockquote--skin-quotation .elementor-blockquote::before {
+    content: '❞';
+}
