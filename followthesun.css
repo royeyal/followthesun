@@ -1,121 +1,272 @@
-/* * Shrinking Sticky header, Elementor Container edition
-* class: .sticky-header
-* This will only work with the Elementor container section
-* the header uses additional 3 classes to gain higher CSS specificity and to avoid adding !important */
-
-header {
-	--header-height: 100px; /* Set your own header height */
-	--shrink-header-to: 0.6; /* Shrinks to 60%, values: 0.1 to 1 */
-	--transition-timing: .45s cubic-bezier(.4, 0, .2, 1); /* values: .1s to 0.5s (or more), replace "cubic-bezier(.4, 0, .2, 1)" with "ease" if you need a simpler transition */
-	min-height: var(--header-height);
-	--transition: background-color var(--transition-timing),
-					backdrop-filter var(--transition-timing),
-					box-shadow var(--transition-timing),
-					min-height var(--transition-timing);
+:root {
+  --shadow-color: 0deg 0% 63%;
+  --shadow-elevation-low:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+    0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34),
+    1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.34);
+  --shadow-elevation-medium:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+    0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+    2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+    5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+  --shadow-elevation-high:
+    0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+    1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-color) / 0.34),
+    2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-color) / 0.34),
+    4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-color) / 0.34),
+    7.1px 14.3px 18px -1.4px hsl(var(--shadow-color) / 0.34),
+    11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-color) / 0.34),
+    17px 33.9px 42.7px -2.1px hsl(var(--shadow-color) / 0.34),
+    25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.34);
 }
-header.sticky-header {
-	background-color: transparent;
-	min-height: var(--min-height);
-}
-header.sticky-header.elementor-sticky--active {
-	background-color: var(--e-global-color-5f1c106);
-	box-shadow: 0px 4px 33px 1px rgba(0, 0, 0, .07); /* Delete this line if you don't want shadow on scroll */
-	/* backdrop-filter: saturate(180%) blur(20px); */
-	min-height: calc( var(--header-height) * var(--shrink-header-to) );
-	transition: min-height var(--transition-timing);
-}
-
-header.sticky-header.e-container.elementor-element {
-	background-color: rgba(244, 245, 248, 1); /* Set your own background color */
-}
-header.sticky-header.e-container.elementor-element.elementor-sticky--effects {
-	background-color: rgba(244, 245, 248, .8); /* Set your own background color on scroll */
+/* Sticky effect */
+.w-nav.is-sticky {
+	background-color: var(--brand--lignt-transparent);
+  backdrop-filter: blur(10px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  min-height: 3.5rem;
 }
 
-/***
-* class: .logo
-* Add the class "logo" to your logo to scale your logo to 80% on scroll
-*/
-header.sticky-header .logo img,
-header.sticky-header .logo.elementor-widget-theme-site-logo img,
-header.sticky-header .logo .elementor-icon svg {
-	transition: transform var(--transition-timing);
+.w-nav .navbar3_dropdown-toggle {
+	color: var(--link-color--link-secondary);
 }
-header.sticky-header.elementor-sticky--effects .logo img,
-header.sticky-header.elementor-sticky--effects .logo.elementor-widget-theme-site-logo img,
-header.sticky-header.elementor-sticky--effects .logo .elementor-icon svg {
-	transform: scale(.80); /* Shrinks logo to 80%, values: 0.10 to 1 */
+.w-nav.is-sticky .w-nav-link,
+.w-nav.is-sticky .footer3_social-link svg,
+.w-nav.is-sticky .w-dropdown-toggle,
+.w-nav.is-sticky .dropdown-chevron svg,
+.w-nav.is-sticky .header_social-link,
+.w-nav.is-sticky .navbar3_dropdown-toggle {
+	color: var(--text-color--text-primary);
 }
-header.sticky-header .logo .elementor-icon svg {
-	width: auto;
-}
-
-/***
-* Optional: Shorter header on mobile
-*/
-@media only screen and (max-width: 767px) {
-	header.sticky-header,
-	header.sticky-header.e-container.elementor-element {
-		--header-height: 70px;
-	}
+.w-nav.is-sticky .menu-icon3_line-top,
+.w-nav.is-sticky .menu-icon3_line-middle,
+.w-nav.is-sticky .menu-icon3_line-bottom {
+	background-color: var(--text-color--text-primary);
 }
 
-.elementor-widget-button .elementor-button svg {
-    transition: transform .45s cubic-bezier(.4, 0, .2, 1);
-	transform: translate(1px, 1px);
-}
-.elementor-widget-button .elementor-button:hover svg {
-	transform: translate(-3px, 1px);
-}
-
-.content-block-heading .elementor-cta__content {
-	order: 2;
-}
-.content-block-heading .elementor-cta {
-	max-width: 780px;
-	margin: 0 auto;
-}
-.content-block-heading.full-width .elementor-cta  {
-    max-width: 100%;
-}
-.content-block-heading .elementor-cta__button-wrapper, .content-block-heading.w-image .elementor-cta__bg-wrapper {
-	text-align: center;
-}
-.content-block-heading .elementor-ribbon {
-    top: 120px;
-    transform: none;
-    height: auto;
-    width: 50%;
-    left: 20%;
-    order: 1;
-    border-radius: 50px;
-}
-.content-block-heading .elementor-ribbon-inner {
-	transform: none;
-	width: 100%;
-	margin-top: 0;
-}
-.content-block-text .elementor-ribbon-inner {
-	text-align: right;
-}
-.content-block-heading .elementor-cta__title,
-.content-block-heading .elementor-cta__icon {
-    text-align: center;
+.is-navbar3-button::before {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+border-radius: inherit;
+background-image: linear-gradient(136deg,#00FFD2,#0782FF);
+z-index: -1;
+margin: -2px;
 }
 
-.shadow-layers {
-    box-shadow: 1.7px 0.9px 1.2px rgba(0, 0, 0, 0.019),
-  3.6px 1.9px 2.6px rgba(0, 0, 0, 0.027),
-  5.6px 2.9px 4.3px rgba(0, 0, 0, 0.032),
-  7.9px 4.1px 6.5px rgba(0, 0, 0, 0.036),
-  10.8px 5.6px 9.3px rgba(0, 0, 0, 0.04),
-  14.3px 7.5px 13.1px rgba(0, 0, 0, 0.043),
-  19.2px 10px 18.6px rgba(0, 0, 0, 0.049),
-  26.6px 13.9px 27.3px rgba(0, 0, 0, 0.056),
-  39.5px 20.6px 42.9px rgba(0, 0, 0, 0.068),
-  69px 36px 80px rgba(0, 0, 0, 0.09);
+.body_content-wrapper {
+	scroll-margin-top: 80px;
+}
+/* Ensure smooth scrolling */
+html, body {
+    scroll-padding-top: 80px; /* Adjust based on navbar height */
 }
 
-.elementor-blockquote--skin-quotation .elementor-blockquote::before {
-    content: '❞';
+.layout400_card:hover .layout400_card-image,
+.event18_item-link:hover .event18_image {
+	/*transform: scale(1.05);*/
+}
+
+/* Ensure all elements inherit the color from its parent */
+body * {
+    color: inherit;
+}
+
+a,
+.w-input,
+.w-select,
+.w-tab-link,
+/*.w-nav-link,*/
+.w-slider-arrow-left,
+.w-slider-arrow-right,
+.w-dropdown-btn,
+.w-dropdown-toggle,
+.w-dropdown-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+}
+
+/* Focus state style for keyboard navigation for the focusable elements */
+*[tabindex]:focus-visible,
+  input[type="file"]:focus-visible {
+   outline: 0.125rem solid #4d65ff;
+   outline-offset: 0.125rem;
+}
+
+/* Get rid of top margin on first element in any rich text element */
+.w-richtext > :not(div):first-child, .w-richtext > div:first-child > :first-child {
+  margin-top: 0 !important;
+}
+
+/* Get rid of bottom margin on last element in any rich text element */
+.w-richtext>:last-child, .w-richtext ol li:last-child, .w-richtext ul li:last-child {
+	margin-bottom: 0 !important;
+}
+
+/* Prevent all click and hover interaction with an element */
+.pointer-events-off {
+	pointer-events: none;
+}
+
+/* Enables all click and hover interaction with an element */
+.pointer-events-on {
+  pointer-events: auto;
+}
+
+/* Create a class of .div-square which maintains a 1:1 dimension of a div */
+.div-square::after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+/* Make sure containers never lose their center alignment */
+.container-medium,.container-small, .container-large {
+	margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+
+/* Apply "..." after 3 lines of text */
+.text-style-3lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+/* Apply "..." after 2 lines of text */
+.text-style-2lines {
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+/* Adds inline flex display */
+.display-inlineflex {
+  display: inline-flex;
+}
+
+/* These classes are never overwritten */
+.hide {
+  display: none !important;
+}
+
+@media screen and (max-width: 991px) {
+    .hide, .hide-tablet {
+        display: none !important;
+    }
+}
+  @media screen and (max-width: 767px) {
+    .hide-mobile-landscape{
+      display: none !important;
+    }
+}
+  @media screen and (max-width: 479px) {
+    .hide-mobile{
+      display: none !important;
+    }
+}
+ 
+.margin-0 {
+  margin: 0rem !important;
+}
+  
+.padding-0 {
+  padding: 0rem !important;
+}
+
+.spacing-clean {
+padding: 0rem !important;
+margin: 0rem !important;
+}
+
+.margin-top {
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-top {
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+  
+.margin-right {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-right {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.margin-bottom {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.padding-bottom {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.margin-left {
+  margin-top: 0rem !important;
+  margin-right: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+  
+.padding-left {
+  padding-top: 0rem !important;
+  padding-right: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+  
+.margin-horizontal {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+
+.padding-horizontal {
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+}
+
+.margin-vertical {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+  
+.padding-vertical {
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+/* Apply "..." at 100% width */
+.truncate-width { 
+		width: 100%; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+/* Removes native scrollbar */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none; 
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
 }
